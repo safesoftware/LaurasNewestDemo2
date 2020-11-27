@@ -1,0 +1,56 @@
+<!-- Populate Forms Dynamically Example from FME Server Developer Playground -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Populate Forms Dynamically Example from FME Server Developer Playground</title>
+	<!-- Styles for example -->
+	<link rel="stylesheet" href="http://playground.fmeserver.com/css/FMEServerExamples.css" type="text/css" />
+	<!-- Include FMEServer.js -->
+	<script type="text/javascript" src="http://api.fmeserver.com/js/v1.1/FMEServer.js"></script>
+</head>
+<body>
+	<form id="exampleForm">
+		<label>Repository: </label>
+		<input id="repository-name" type="text" name="repository" value="NoOutputTesting" /><br />
+		<label>Workspace: </label>
+		<input id="workspace-name" type="text" name="workspace" value="none2textline.fmw" /><br />
+		<input type="button" onclick="runDataDownloadForm();" value="Run Data Download"/>
+		<input type="button" onclick="runDataStreamingForm();" value="Run Data Streaming"/>
+	</form>
+	<hr />
+	<form id="output-form"></form>
+
+	<script type="text/javascript">
+		var formFields = [];
+
+		window.onload = function() {
+			FMEServer.init({
+				server : "http://bd-lkdesktop",
+				token : "80f1cdf653a99fafc3d89f1d92427d9862cb4e3d"
+			});
+		};
+
+		function runDataDownloadForm() {
+			var repository = document.getElementById( "repository-name" ).value;
+			var workspace = document.getElementById( "workspace-name" ).value;
+			var params = "";
+
+			// Get the workspace parameters from FME Server
+			FMEServer.runDataDownload( repository, workspace, params, displayOutput );
+		};
+
+		function runDataStreamingForm(){
+			var repository = document.getElementById("repository-name").value;
+			var workspace  = document.getElementById("workspace-name").value;
+			var params = "";
+
+			FMEServer.runDataStreaming(repository, workspace, params, displayOutput);
+		};
+
+		function displayOutput(json) {
+			console.log(json);
+		};
+
+	</script>
+</body>
+</html>
