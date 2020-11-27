@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lookup Existing Users Token Example from FME Server Developer Playground</title>
+	<!-- Styles for example -->
+	<link rel="stylesheet" href="http://playground.fmeserver.com/css/FMEServerExamples.css" type="text/css" />
+	<!-- Include FMEServer.js -->
+	<script type="text/javascript" src="http://api.fmeserver.com/js/v1.1/FMEServer.js"></script>
+</head>
+<body>
+	<p><a href='http://bd-lkdesktop/fmerest/v2/info?detail=low&token=0568c2d5ef5ce6e52609e37e60b12a654b596008' target='_blank'>http://bd-lkdesktop/fmerest/v2/info?detail=low</a></p>
+
+		<input type="button" onclick="getInfo();" value="Get Info" />
+
+	<script type="text/javascript">
+		
+		function getInfo(){
+
+			req = new XMLHttpRequest();
+			req.open('GET', 'http://bd-lkdesktop/fmerest/v2/info?detail=low', true);
+			req.setRequestHeader('Authorization', 'fmetoken token=0568c2d5ef5ce6e52609e37e60b12a654b596008');
+			req.setRequestHeader('Origin', 'file://');
+			req.send();
+		}
+
+	</script>
+
+</body>
+</html>
+
+
+
+
